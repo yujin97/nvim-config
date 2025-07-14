@@ -3,6 +3,9 @@ return {
   event = 'VeryLazy',
   opts = {
     delay = 0,
+    spec = {
+      { '<leader>s', group = '[S]earch' },
+    },
   },
   keys = {
     {
@@ -12,8 +15,5 @@ return {
       end,
       desc = 'Buffer Local Keymaps (which-key)',
     },
-  },
-  spec = {
-    { '<leader-s>', group = '[S]earch' },
   },
 }
