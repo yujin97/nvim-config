@@ -19,16 +19,20 @@ return {
           mode = mode or 'n'
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
+        -- align with the global defaults
+        map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+        map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+        map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+        map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+        map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
 
-        map('gn', vim.lsp.buf.rename, '[R]e[n]ame')
-        map('ga', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-        map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-        map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+        -- WARN: This is not Goto Definition, this is Goto Declaration.
+        --  For example, in C this would take you to the header.
+        map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
-        map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
         map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
         map('gt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
         local client = vim.lsp.get_client_by_id(event.data.client_id)
