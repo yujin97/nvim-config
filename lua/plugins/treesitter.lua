@@ -41,8 +41,10 @@ return {
       end
     end
 
-    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    vim.wo[0][0].foldmethod = 'expr'
+    vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.o.foldmethod = 'expr'
+    vim.o.foldlevel = 99
+    vim.o.foldlevelstart = 99
 
     local available_parsers = treesitter.get_available()
 
